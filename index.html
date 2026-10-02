@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sneaker Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Sneaker Store</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h2>Find Your Perfect Sneaker</h2>
+  <p>Shop the latest and greatest sneakers.</p>
+</section>
+
+<h2 style="text-align:center;">Featured Sneakers</h2>
+<div class="product-grid" id="featured"></div>
+
+<script src="js/data.js"></script>
+<script>
+  const featured = document.getElementById("featured");
+  featured.innerHTML = products.slice(0, 3).map(p => `
+    <div class="product-card">
+      <img src="${p.image}">
+      <h3>${p.name}</h3>
+      <p>${p.brand}</p>
+      <p>$${p.price}</p>
+      <a href="product.html?id=${p.id}">View Details</a>
+    </div>
+  `).join("");
+</script>
+<footer>© 2026 Sneaker Store</footer>
+
+</body>
+</html>

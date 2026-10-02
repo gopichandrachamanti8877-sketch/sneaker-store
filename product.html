@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Details</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Sneaker Store</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</header>
+
+<div id="details" style="padding:20px;"></div>
+
+<script src="js/data.js"></script>
+<script src="js/cart.js"></script>
+<script>
+  const id = new URLSearchParams(window.location.search).get("id");
+  const p = products.find(x => x.id == id);
+
+  document.getElementById("details").innerHTML = `
+    <img src="${p.image}" style="width:300px;">
+    <h2>${p.name}</h2>
+    <p><strong>Brand:</strong> ${p.brand}</p>
+    <p><strong>Price:</strong> $${p.price}</p>
+    <p><strong>Category:</strong> ${p.category}</p>
+    <p>${p.description}</p>
+
+    <label>Sizes:</label>
+    <select>
+      ${p.sizes.map(s => `<option>${s}</option>`).join("")}
+    </select>
+
+    <br><br>
+    <button onclick="addToCart(${p.id})">Add to Cart</button>
+    <br><br>
+    <a href="products.html">Back to Products</a>
+  `;
+</script>
+
+<footer>© 2026 Sneaker Store</footer>
+
+</body>
+</html>
