@@ -7,7 +7,7 @@ const products = [
     category: "Running",
     description: "Classic Air Max cushioning with modern comfort.",
     sizes: [38, 39, 40, 41, 42, 43],
-    image: "images/airmax90.jpg"
+    image: "images/air-max-90.jpg"
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const products = [
     category: "Running",
     description: "Boost cushioning for maximum comfort.",
     sizes: [39, 40, 41, 42, 44],
-    image: "images/ultraboost22.jpg"
+   image: "images/ultraboost-22.jpg"
   },
   {
     id: 3,
@@ -27,6 +27,6 @@ const products = [
     category: "Casual",
     description: "Iconic canvas sneaker for everyday wear.",
     sizes: [38, 39, 40, 41, 42],
-    image: "images/chucktaylor.jpg"
+    image: "images/chuck-taylor.jpg"
   }
-];
+]
