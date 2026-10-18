@@ -1,63 +1,13 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-function saveCart() {
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-function addToCart(id) {
-  const item = cart.find(p => p.id === id);
-  if (item) {
-    item.qty++;
-  } else {
-    cart.push({ id, qty: 1 });
-  }
-  saveCart();
-  alert("Added to cart!");
-}
-
-function removeFromCart(id) {
-  cart = cart.filter(p => p.id !== id);
-  saveCart();
-  renderCart();
-}
-
-function updateQty(id, qty) {
-  const item = cart.find(p => p.id === id);
-  item.qty = qty;
-  saveCart();
-  renderCart();
-}
-
-function renderCart() {
-  const container = document.getElementById("cart-items");
-  const totalBox = document.getElementById("cart-total");
-
-  if (cart.length === 0) {
-    container.innerHTML = "<p>Your cart is empty.</p>";
-    totalBox.innerHTML = "";
-    return;
-  }
-
-  container.innerHTML = "";
-  let total = 0;
-
-  cart.forEach(item => {
-    const product = products.find(p => p.id === item.id);
-    total += product.price * item.qty;
-
-    container.innerHTML += `
-      <div class="cart-item">
-        <img src="${product.image}" />
-        <div>
-          <h3>${product.name}</h3>
-          <p>$${product.price}</p>
-          <input type="number" min="1" value="${item.qty}" 
-            onchange="updateQty(${item.id}, this.value)">
-          <button onclick="removeFromCart(${item.id})">Remove</button>
-        </div>
-      </div>
-    `;
-  });
-
-  totalBox.innerHTML = `<h2>Total: $${total}</h2>`;
-}
+const CART_KEY='sneaker_cart_v2';
+function readCart(){try{const v=JSON.parse(localStorage.getItem(CART_KEY));return Array.isArray(v)?v.filter(x=>products.some(p=>p.id===x.id)&&Number.isInteger(x.qty)&&x.qty>0&&x.qty<=99):[]}catch{return []}}
+let cart=readCart();function saveCart(){localStorage.setItem(CART_KEY,JSON.stringify(cart));updateCartBadge()}
+function updateCartBadge(){const b=document.getElementById('cart-count');if(b)b.textContent=cart.reduce((s,x)=>s+x.qty,0)}
+function addToCart(id){const product=products.find(p=>p.id===id);if(!product)return;const x=cart.find(i=>i.id===id);if(x){x.qty=Math.min(99,x.qty+1)}else{cart.push({id,qty:1})}saveCart();const note=document.getElementById('cart-message');if(note){note.textContent='Added to cart!';note.hidden=false}else{alert('Added to cart!')}}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);saveCart();renderCart()}
+function updateQty(id,qty){const n=Number(qty);if(!Number.isInteger(n)||n<1||n>99){renderCart();return}const item=cart.find(x=>x.id===id);if(item)item.qty=n;saveCart();renderCart()}
+function cartTotal(){return cart.reduce((sum,x)=>sum+(products.find(p=>p.id===x.id)?.price||0)*x.qty,0)}
+function renderCart(){const root=document.getElementById('cart-items'),box=document.getElementById('cart-total');if(!root||!box)return;
+ if(!cart.length){root.innerHTML='<div class="empty-state"><h2>Your cart is empty</h2><p>Explore our collection and find your next favorite pair.</p><a class="button" href="products.html">Shop sneakers</a></div>';box.innerHTML='';return}
+ root.innerHTML=cart.map(x=>{const p=products.find(p=>p.id===x.id);return `<article class="cart-item"><img src="${p.image}" alt="${p.name}"><div class="cart-info"><span class="eyebrow">${p.brand}</span><h3>${p.name}</h3><p>${money(p.price)} each</p><button class="text-button" onclick="removeFromCart(${x.id})">Remove</button></div><div class="cart-qty"><label for="qty-${x.id}">Quantity</label><input id="qty-${x.id}" aria-label="Quantity for ${p.name}" type="number" min="1" max="99" step="1" value="${x.qty}" onchange="updateQty(${x.id},this.value)"><strong>${money(p.price*x.qty)}</strong></div></article>`}).join('');
+ box.innerHTML=`<div class="summary"><h2>Order summary</h2><div class="summary-row"><span>Subtotal</span><strong>${money(cartTotal())}</strong></div><div class="summary-row"><span>Shipping</span><span>Free (demo)</span></div><div class="summary-row grand"><span>Total</span><strong>${money(cartTotal())}</strong></div><a class="button wide" href="checkout.html">Proceed to checkout →</a><p class="small-note">Demo store · No real payments</p></div>`}
+document.addEventListener('DOMContentLoaded',updateCartBadge);

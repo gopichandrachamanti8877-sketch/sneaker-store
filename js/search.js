@@ -1,18 +1,3 @@
-function searchProducts() {
-  const query = document.getElementById("search").value.toLowerCase();
-  const results = products.filter(p =>
-    p.name.toLowerCase().includes(query) ||
-    p.brand.toLowerCase().includes(query)
-  );
-
-  renderProducts(results);
-
-  const msg = document.getElementById("no-results");
-  msg.style.display = results.length === 0 ? "block" : "none";
-}
-
-function clearSearch() {
-  document.getElementById("search").value = "";
-  renderProducts(products);
-  document.getElementById("no-results").style.display = "none";
-}
+function renderProducts(arr){document.getElementById('product-list').innerHTML=arr.map(card).join('');document.getElementById('no-results').hidden=arr.length!==0}
+function searchProducts(){const q=document.getElementById('search').value.trim().toLowerCase();renderProducts(products.filter(p=>[p.name,p.brand,p.category].some(s=>s.toLowerCase().includes(q))))}
+function clearSearch(){document.getElementById('search').value='';renderProducts(products)}
