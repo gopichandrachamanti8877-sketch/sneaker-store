@@ -1,1 +1,178 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Product | SoleStudio</title><link rel="stylesheet" href="css/style.css"></head><body><header class="site-header"><div class="container header-inner"><a class="logo" href="index.html"><span class="logo-mark">S</span> SOLE<span class="logo-accent">STUDIO</span></a><nav aria-label="Main navigation"><a href="index.html">Home</a><a href="products.html">Shop</a><a href="cart.html">Cart <span class="badge" id="cart-count">0</span></a></nav><div id="auth-links" class="auth-links"></div></div></header><main><section class="container section" id="details"></section></main><footer class="site-footer"><div class="container footer-inner"><strong>SOLESTUDIO</strong><span>Built for the next step. © 2026 · Academic demo — no real purchases.</span></div></footer><script src="js/data.js"></script><script src="js/auth.js"></script><script src="js/cart.js"></script><script>const id=Number(new URLSearchParams(location.search).get('id'));const p=products.find(x=>x.id===id);document.getElementById('details').innerHTML=p?`<a class="inline-link" href="products.html">← Back to collection</a><div class="details-layout"><div class="details-photo"><img src="${p.image}" alt="Illustration of ${p.name}"></div><div class="details-copy"><span class="eyebrow">${p.brand} / ${p.category}</span><h1>${p.name}</h1><p class="detail-price">${money(p.price)}</p><p>${p.description}</p><label for="size">Select size (EU)</label><select id="size">${p.sizes.map(s=>`<option>${s}</option>`).join('')}</select><button class="button wide" onclick="addToCart(${p.id})">Add to cart →</button><p id="cart-message" class="success-note" hidden></p><p class="small-note">Demo product · Image is an illustration</p></div></div>`:'<div class="empty-state"><h1>Product not found</h1><a class="button" href="products.html">Return to shop</a></div>';</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Product | SoleStudio</title>
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header class="site-header">
+
+        <div class="container header-inner">
+
+            <!-- Website Logo -->
+            <a class="logo" href="index.html">
+                <span class="logo-mark">S</span>
+                SOLE<span class="logo-accent">STUDIO</span>
+            </a>
+
+            <!-- Navigation Menu -->
+            <nav aria-label="Main navigation">
+                <a href="index.html">Home</a>
+                <a href="products.html">Shop</a>
+                <a href="cart.html">
+                    Cart <span class="badge" id="cart-count">0</span>
+                </a>
+            </nav>
+
+            <!-- Authentication Links -->
+            <div id="auth-links" class="auth-links"></div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main>
+
+        <!-- Product Details Section -->
+        <section
+            class="container section"
+            id="details"
+        ></section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+
+        <div class="container footer-inner">
+
+            <strong>SOLESTUDIO</strong>
+
+            <span>
+                Built for the next step. © 2026 ·
+                Academic demo — no real purchases.
+            </span>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <!-- Product Data -->
+    <script src="js/data.js"></script>
+
+    <!-- Authentication -->
+    <script src="js/auth.js"></script>
+
+    <!-- Shopping Cart Functionality -->
+    <script src="js/cart.js"></script>
+
+    <!-- Display Selected Product Details -->
+    <script>
+
+        // Get product ID from the URL
+        const id = Number(
+            new URLSearchParams(location.search).get('id')
+        );
+
+        // Find the selected product
+        const p = products.find(x => x.id === id);
+
+        // Display product information
+        document.getElementById('details').innerHTML = p
+            ? `
+                <a class="inline-link" href="products.html">
+                    ← Back to collection
+                </a>
+
+                <div class="details-layout">
+
+                    <!-- Product Image -->
+                    <div class="details-photo">
+                        <img
+                            src="${p.image}"
+                            alt="Illustration of ${p.name}"
+                        >
+                    </div>
+
+                    <!-- Product Information -->
+                    <div class="details-copy">
+
+                        <span class="eyebrow">
+                            ${p.brand} / ${p.category}
+                        </span>
+
+                        <h1>${p.name}</h1>
+
+                        <p class="detail-price">
+                            ${money(p.price)}
+                        </p>
+
+                        <p>${p.description}</p>
+
+                        <!-- Size Selection -->
+                        <label for="size">
+                            Select size (EU)
+                        </label>
+
+                        <select id="size">
+                            ${p.sizes.map(s => `
+                                <option>${s}</option>
+                            `).join('')}
+                        </select>
+
+                        <!-- Add to Cart Button -->
+                        <button
+                            class="button wide"
+                            onclick="addToCart(${p.id})"
+                        >
+                            Add to cart →
+                        </button>
+
+                        <!-- Cart Confirmation Message -->
+                        <p
+                            id="cart-message"
+                            class="success-note"
+                            hidden
+                        ></p>
+
+                        <p class="small-note">
+                            Demo product · Image is an illustration
+                        </p>
+
+                    </div>
+
+                </div>
+            `
+            : `
+                <!-- Product Not Found -->
+                <div class="empty-state">
+
+                    <h1>Product not found</h1>
+
+                    <a class="button" href="products.html">
+                        Return to shop
+                    </a>
+
+                </div>
+            `;
+
+    </script>
+
+</body>
+
+</html>
