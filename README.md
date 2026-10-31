@@ -1,20 +1,42 @@
-# Sneaker Store — Sprint 2 (SoleStudio UI)
+# SoleStudio — Sneaker Store | Sprint 3 Final Demo
 
-Run with `python -m http.server 8000` from this folder and open http://localhost:8000.
+A polished static HTML/CSS/JavaScript **academic demonstration** continuing the existing Sprint 1 and Sprint 2 project.
 
-## Sprint 2 Jira items
-- SNEAK-20 Registration: `register.html`, `js/auth.js`
-- SNEAK-21 Login: `login.html`, `js/auth.js`
-- SNEAK-22 Logout: header in `js/auth.js`
-- SNEAK-23 Invalid login: error message in `js/auth.js`
-- SNEAK-24 Quantity changes: `js/cart.js`
-- SNEAK-25 Totals: `js/cart.js`
-- SNEAK-26 Checkout: `checkout.html`
-- SNEAK-27 Checkout validation: `js/checkout.js`
-- SNEAK-28 Checkout login gate: `js/checkout.js`
-- SNEAK-29/30 Manual test checklist: `TESTING.md`
+## Run locally
 
-## IMPORTANT: Academic demo only
-This is a **static HTML/JS demo** with browser-local accounts and a browser session, not production authentication. Browser storage is user-editable; SHA-256 hashing in the browser does not provide server-side account security. The checkout is a **simulated order** with no payment processing and no server-side verification. Do not use real passwords or sensitive customer information. A production store requires backend authentication, protected API routes, a real database, HTTPS and server-side order/price validation.
+```powershell
+python -m http.server 8000
+```
 
-Product visuals are custom local SVG **illustrations**, not official product photographs. Replace them with licensed product photography if required.
+Open `http://localhost:8000`. Deploy to GitHub Pages using `main` / `(root)` after testing.
+
+## Features
+
+- 18 curated sneaker products, each with original SVG concept artwork
+- Homepage, product catalogue, individual product details, about/contact pages
+- Search, brand/category filters, low-to-high and high-to-low sorting
+- Product availability, stock restrictions, EU size selection
+- Size-aware cart, quantities, removal, live totals, cart badge and notifications
+- Browser-only registration, login, logout and checkout login gate
+- Shipping validation, **simulated** payment choices and demo order confirmation
+- Responsive desktop/tablet/mobile design
+
+## Jira Sprint 3 mapping
+
+- **SNEAK-32** Simulated Payment Process → `checkout.html`, `js/checkout.js`
+- **SNEAK-33** Order Confirmation Page → `success.html`
+- **SNEAK-34** Order Summary & Cart Completion → `js/cart.js`, `js/checkout.js`
+- **SNEAK-35** Integrate the Complete Shopping Journey → all HTML and JS pages
+- **SNEAK-36** Fix Critical and High-Priority Bugs → see `TESTING.md` (test before marking Done)
+- **SNEAK-37** Responsive Layout & Navigation Check → `css/style.css`, `TESTING.md`
+- **SNEAK-38** End-to-End Website Testing → `TESTING.md`
+- **SNEAK-39** Final Test Report & Evidence → `TESTING.md` (fill with actual evidence)
+- **SNEAK-40** Final Documentation & Demonstration → this README and `DEMO_SCRIPT.md`
+
+> Product expansion and catalogue filters are additional enhancements beyond the 9 visible Sprint 3 issues. Add Jira issues if your professor requires traceability.
+
+## Critical limitations — NOT production ready
+
+This is **not a real store**. No real money is collected, no payment gateway is integrated, and no orders are sent to a server. Payment methods are simulated; never enter real card details. Authentication and order storage are local to each browser and can be modified by users. Client-side password hashing is not a replacement for secure server-side authentication. Do not enter real personal information or reuse real passwords. Real e-commerce needs server-side account handling, a database, inventory/order verification, payment processor, security controls and legal/compliance review.
+
+Artwork is original SVG illustration; product names are for a student demonstration and are not endorsements or official product photographs.
